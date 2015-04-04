@@ -7,8 +7,12 @@ dark = '#230602'
 transparent = '#FFFFFF00'
 numbers = %w(1 2 2 3 3 3 4 4 4 4 5 5 5 5 5 6 6 6 6 6 6 7 7 7 7 7 7 7 8 8 8 8 8 8 8 8 N N N N N N N N N X X X X X X X X X X)
 cardnb = 55
-
-Squib::Deck.new(cards: cardnb, layout: 'layout.yml') do
+width = 825
+height = 1155
+topm = 52
+leftm = 37
+font = 'Lavi 90'
+Squib::Deck.new(width: width, height: height, cards: cardnb, layout: 'layout.yml') do
 
   png file: ['../0101.png', 
              '../0201.png', '../0202.png',
@@ -26,32 +30,32 @@ Squib::Deck.new(cards: cardnb, layout: 'layout.yml') do
              '../1001.png', '../1002.png', '../1003.png', '../1004.png', '../1005.png',
              '../1006.png', '../1007.png', '../1008.png', '../1009.png', '../1010.png',
              ],
-       x: 37, y: 37
+       x: leftm, y: topm
 
-  rect x: 37, y: 37, width: 750, height: 1050, fill_color: transparent, stroke_color: light,
+  rect x: leftm, y: topm, width: 750, height: 1050, fill_color: transparent, stroke_color: light,
        stroke_width: '0.05cm'
 
-  [37, 37+750].each do |x|
-    [37, 37+1050].each do |y|
+  [leftm, leftm+750].each do |x|
+    [topm, topm+1050].each do |y|
        circle x: x, y: y, fill_color: dark, radius: 160, stroke_color: light,
        stroke_width: '0.05cm'
     end
   end
 
-  rect x: 0, y: 0, width: 37, height: 1125, fill_color: dark, stroke_color: dark
-  rect x: 0, y: 0, width: 825, height: 37, fill_color: dark, stroke_color: dark
-  rect x: 37+750, y: 0, width: 37, height: 1125, fill_color: dark, stroke_color: dark
-  rect x: 0, y: 37+1050, width: 825, height: 37, fill_color: dark, stroke_color: dark
+  rect x: 0, y: 0, width: leftm, height: height, fill_color: dark, stroke_color: dark
+  rect x: 0, y: 0, width: width, height: topm, fill_color: dark, stroke_color: dark
+  rect x: leftm+750, y: 0, width: leftm, height: height, fill_color: dark, stroke_color: dark
+  rect x: 0, y: topm+1050, width: width, height: topm, fill_color: dark, stroke_color: dark
 
-  [45, 660].each do |x|
+  [45, 680].each do |x|
     text str: numbers,
-        color: light, font: 'ChunkFive Roman, Sans 72',
-        x: x, y: 45, width: 120, align: :center
+        color: light, font: font,
+        x: x, y: 55, width: 100, align: :center
   end
-  [165, 780].each do |x|
+  [145, 790].each do |x|
     text str: numbers,
-        color: light, font: 'ChunkFive Roman, Sans 72',
-        x: x, y: 1080, width: 120, align: :center, angle: 3.14159265
+        color: light, font: font,
+        x: x, y: 1100, width: 100, align: :center, angle: 3.14159265
   end
 
   save format: :png
