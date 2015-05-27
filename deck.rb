@@ -7,14 +7,20 @@ dark = '#230602'
 transparent = '#FFFFFF00'
 numbers = %w(1 2 2 3 3 3 4 4 4 4 5 5 5 5 5 6 6 6 6 6 6 7 7 7 7 7 7 7 8 8 8 8 8 8 8 8 N N N N N N N N N X X X X X X X X X X)
 cardnb = 55
-width = 825
-height = 1155
-topm = 52
-leftm = 37
-font = 'Lavi 90'
+width = 750
+height = 1050
+topm = 0
+leftm = 0
+nw = 60
+bbvm = 75
+bbhm = bbvm + 8
+fontpx = 95
+font = "Drukaatieburti #{fontpx}px"
+drawlines = false
+puts font
 Squib::Deck.new(width: width, height: height, cards: cardnb, layout: 'layout.yml') do
 
-  png file: ['../0101.png', 
+  png file: ['../0101.png',
              '../0201.png', '../0202.png',
              '../0301.png', '../0302.png', '../0303.png',
              '../0401.png', '../0402.png', '../0403.png', '../0404.png',
@@ -30,33 +36,56 @@ Squib::Deck.new(width: width, height: height, cards: cardnb, layout: 'layout.yml
              '../1001.png', '../1002.png', '../1003.png', '../1004.png', '../1005.png',
              '../1006.png', '../1007.png', '../1008.png', '../1009.png', '../1010.png',
              ],
-       x: leftm, y: topm
+       x: leftm, y: topm, width: 750, height: 1050
 
-  rect x: leftm, y: topm, width: 750, height: 1050, fill_color: transparent, stroke_color: light,
-       stroke_width: '0.05cm'
+  png file: ['../DavidRevoy/card_001_export.png'] * 1 +
+            ['../DavidRevoy/card_003_export.png'] * 2 +
+            ['../DavidRevoy/card_007_export.png'] * 3 +
+            ['../DavidRevoy/card_004_export.png'] * 4 +
+            ['../DavidRevoy/card_009_export.png'] * 5 +
+            ['../DavidRevoy/card_002_export.png'] * 6 +
+            ['../DavidRevoy/card_005_export.png'] * 7 +
+            ['../DavidRevoy/card_006_export.png'] * 8 +
+            ['../DavidRevoy/card_001_export.png'] * 9 +
+            ['../DavidRevoy/card_010_export.png'] * 10,
+      x: leftm, y: topm, width: 750, height: 1050
 
-  [leftm, leftm+750].each do |x|
-    [topm, topm+1050].each do |y|
-       circle x: x, y: y, fill_color: dark, radius: 160, stroke_color: light,
-       stroke_width: '0.05cm'
-    end
+  if drawlines
+      line stroke_color: light,
+            x1: leftm + bbhm + nw/2, y1: 0, x2: leftm + bbhm + nw/2, y2: height,
+                   stroke_width: 2
+      line stroke_color: light,
+            x1: width - (leftm + bbhm + nw/2), y1: 0, x2: width - (leftm + bbhm + nw/2), y2: height,
+                   stroke_width: 2
+      line stroke_color: light,
+            x1: 0, y1: topm + bbvm + fontpx/2, x2: width, y2: topm + bbvm + fontpx/2,
+                   stroke_width: 2
+      line stroke_color: light,
+            x1: 0, y1: height-(topm + bbvm + fontpx/2), x2: width, y2: height-(topm + bbvm + fontpx/2),
+                   stroke_width: 2
+
   end
-
-  rect x: 0, y: 0, width: leftm, height: height, fill_color: dark, stroke_color: dark
-  rect x: 0, y: 0, width: width, height: topm, fill_color: dark, stroke_color: dark
-  rect x: leftm+750, y: 0, width: leftm, height: height, fill_color: dark, stroke_color: dark
-  rect x: 0, y: topm+1050, width: width, height: topm, fill_color: dark, stroke_color: dark
-
-  [45, 680].each do |x|
+  [leftm + bbhm, width - nw - bbhm].each do |x|
     text str: numbers,
-        color: light, font: font,
-        x: x, y: 55, width: 100, align: :center
+        color: dark, font: font,
+        x: x, y: topm + bbvm - 10, width: nw, align: :center
   end
-  [145, 790].each do |x|
+  [leftm + bbhm + nw, width - bbhm].each do |x|
     text str: numbers,
-        color: light, font: font,
-        x: x, y: 1100, width: 100, align: :center, angle: 3.14159265
+        color: dark, font: font,
+        x: x, y: height - bbvm + 10, width: nw, align: :center, angle: 3.14159265
   end
+  png file: ['../DavidRevoy/card_001_trans.png'] * 1 +
+            ['../DavidRevoy/card_003_trans.png'] * 2 +
+            ['../DavidRevoy/card_007_trans.png'] * 3 +
+            ['../DavidRevoy/card_004_trans.png'] * 4 +
+            ['../DavidRevoy/card_009_trans.png'] * 5 +
+            ['../DavidRevoy/card_002_trans.png'] * 6 +
+            ['../DavidRevoy/card_005_trans.png'] * 7 +
+            ['../DavidRevoy/card_006_trans.png'] * 8 +
+            ['../DavidRevoy/card_001_trans.png'] * 9 +
+            ['../DavidRevoy/card_010_export.png'] * 10,
+      x: leftm, y: topm, width: 750, height: 1050
 
   save format: :png
 end
