@@ -38,16 +38,16 @@ Squib::Deck.new(width: width, height: height, cards: cardnb, layout: 'layout.yml
              ],
        x: leftm, y: topm, width: 750, height: 1050
 
-  png file: ['../DavidRevoy/card_001_export.png'] * 1 +
-            ['../DavidRevoy/card_003_export.png'] * 2 +
+  png file: ['../DavidRevoy/card_010_export.png'] * 1 +
+            ['../DavidRevoy/card_004_export.png'] * 2 +
             ['../DavidRevoy/card_007_export.png'] * 3 +
-            ['../DavidRevoy/card_004_export.png'] * 4 +
+            ['../DavidRevoy/card_002_export.png'] * 4 +
             ['../DavidRevoy/card_009_export.png'] * 5 +
-            ['../DavidRevoy/card_002_export.png'] * 6 +
-            ['../DavidRevoy/card_005_export.png'] * 7 +
-            ['../DavidRevoy/card_006_export.png'] * 8 +
-            ['../DavidRevoy/card_001_export.png'] * 9 +
-            ['../DavidRevoy/card_010_export.png'] * 10,
+            ['../DavidRevoy/card_003_export.png'] * 6 +
+            ['../DavidRevoy/card_006_export.png'] * 7 +
+            ['../DavidRevoy/card_005_export.png'] * 8 +
+            ['../DavidRevoy/card_008_export.png'] * 9 +
+            ['../DavidRevoy/card_001_export.png'] * 10,
       x: leftm, y: topm, width: 750, height: 1050
 
   if drawlines
@@ -66,25 +66,31 @@ Squib::Deck.new(width: width, height: height, cards: cardnb, layout: 'layout.yml
 
   end
   [leftm + bbhm, width - nw - bbhm].each do |x|
-    text str: numbers,
+    text range: 0, str: numbers,
+        color: dark, font: font,
+        x: x-5, y: topm + bbvm - 10, width: nw, align: :center
+    text range: 1..cardnb-1, str: numbers,
         color: dark, font: font,
         x: x, y: topm + bbvm - 10, width: nw, align: :center
   end
   [leftm + bbhm + nw, width - bbhm].each do |x|
-    text str: numbers,
+    text range: 0, str: numbers,
+        color: dark, font: font,
+        x: x+5, y: height - bbvm + 10, width: nw, align: :center, angle: 3.14159265
+    text range: 1..cardnb-1, str: numbers,
         color: dark, font: font,
         x: x, y: height - bbvm + 10, width: nw, align: :center, angle: 3.14159265
   end
-  png file: ['../DavidRevoy/card_001_trans.png'] * 1 +
-            ['../DavidRevoy/card_003_trans.png'] * 2 +
+  png file: ['../DavidRevoy/card_010_trans.png'] * 1 +
+            ['../DavidRevoy/card_004_trans.png'] * 2 +
             ['../DavidRevoy/card_007_trans.png'] * 3 +
-            ['../DavidRevoy/card_004_trans.png'] * 4 +
+            ['../DavidRevoy/card_002_trans.png'] * 4 +
             ['../DavidRevoy/card_009_trans.png'] * 5 +
-            ['../DavidRevoy/card_002_trans.png'] * 6 +
-            ['../DavidRevoy/card_005_trans.png'] * 7 +
-            ['../DavidRevoy/card_006_trans.png'] * 8 +
-            ['../DavidRevoy/card_001_trans.png'] * 9 +
-            ['../DavidRevoy/card_010_export.png'] * 10,
+            ['../DavidRevoy/card_003_trans.png'] * 6 +
+            ['../DavidRevoy/card_006_trans.png'] * 7 +
+            ['../DavidRevoy/card_005_trans.png'] * 8 +
+            ['../DavidRevoy/card_008_trans.png'] * 9 +
+            ['../DavidRevoy/card_001_trans.png'] * 10,
       x: leftm, y: topm, width: 750, height: 1050
 
   save format: :png
