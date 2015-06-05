@@ -6,11 +6,21 @@ light = '#F3EFE3'
 dark = '#230602'
 transparent = '#FFFFFF00'
 numbers = %w(1 2 2 3 3 3 4 4 4 4 5 5 5 5 5 6 6 6 6 6 6 7 7 7 7 7 7 7 8 8 8 8 8 8 8 8 N N N N N N N N N X X X X X X X X X X)
+colors = ['#19120c'] * 1 +
+         ['#0E1B0A'] * 2 +
+         ['#0A0D1C'] * 3 +
+         ['#191A0A'] * 4 +
+         ['#190B0A'] * 5 +
+         ['#0E1A0C'] * 6 +
+         ['#0A0E1A'] * 7 +
+         ['#0B1B18'] * 8 +
+         ['#1A0A0A'] * 9 +
+         ['#230503'] * 10
 cardnb = 55
-width = 750
-height = 1050
-topm = 0
-leftm = 0
+width = 815
+height = 1110
+topm = 32
+leftm = 30
 nw = 60
 bbvm = 75
 bbhm = bbvm + 8
@@ -50,6 +60,18 @@ Squib::Deck.new(width: width, height: height, cards: cardnb, layout: 'layout.yml
             ['../DavidRevoy/card_001_export.png'] * 10,
       x: leftm, y: topm, width: 750, height: 1050
 
+  rect stroke_color: transparent, fill_color: colors, x: 0, y:0,
+    width: width, height: topm + 5
+
+  rect stroke_color: transparent, fill_color: colors, x: 0, y:height -topm -5,
+    width: width, height: topm + 5
+
+  rect stroke_color: transparent, fill_color: colors, x: 0, y:0,
+    width: leftm + 5, height: height
+
+  rect stroke_color: transparent, fill_color: colors, x: width -leftm -10, y:0,
+    width: leftm + 10, height: height
+
   if drawlines
       line stroke_color: light,
             x1: leftm + bbhm + nw/2, y1: 0, x2: leftm + bbhm + nw/2, y2: height,
@@ -65,7 +87,7 @@ Squib::Deck.new(width: width, height: height, cards: cardnb, layout: 'layout.yml
                    stroke_width: 2
 
   end
-  [leftm + bbhm, width - nw - bbhm].each do |x|
+  [leftm + bbhm, width - leftm - nw - bbhm].each do |x|
     text range: 0, str: numbers,
         color: dark, font: font,
         x: x-5, y: topm + bbvm - 10, width: nw, align: :center
@@ -73,13 +95,13 @@ Squib::Deck.new(width: width, height: height, cards: cardnb, layout: 'layout.yml
         color: dark, font: font,
         x: x, y: topm + bbvm - 10, width: nw, align: :center
   end
-  [leftm + bbhm + nw, width - bbhm].each do |x|
+  [leftm + bbhm + nw, width - leftm - bbhm].each do |x|
     text range: 0, str: numbers,
         color: dark, font: font,
-        x: x+5, y: height - bbvm + 10, width: nw, align: :center, angle: 3.14159265
+        x: x+5, y: height - topm - bbvm + 10, width: nw, align: :center, angle: 3.14159265
     text range: 1..cardnb-1, str: numbers,
         color: dark, font: font,
-        x: x, y: height - bbvm + 10, width: nw, align: :center, angle: 3.14159265
+        x: x, y: height - topm - bbvm + 10, width: nw, align: :center, angle: 3.14159265
   end
   png file: ['../DavidRevoy/card_010_trans.png'] * 1 +
             ['../DavidRevoy/card_004_trans.png'] * 2 +
